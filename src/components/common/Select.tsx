@@ -42,7 +42,7 @@ const Select: React.FC<SelectProps> = ({
   options,
   value,
   onChange,
-  placeholder = "선택해주세요",
+  placeholder = "선택해주세요!",
   className = "",
 }) => {
   return (
