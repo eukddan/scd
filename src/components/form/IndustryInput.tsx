@@ -1,20 +1,20 @@
 import React from "react";
 
-interface IndustrySelectorProps {
+interface IndustryInputProps {
   industry: string;
-  setIndustry: React.Dispatch<React.SetStateAction<string>>;
+  setIndustry: (value: string) => void; // ✅ Zustand과 호환되는 타입으로 변경
 }
 
-const IndustrySelector: React.FC<IndustrySelectorProps> = ({
+const IndustryInput: React.FC<IndustryInputProps> = ({
   industry,
   setIndustry,
 }) => {
   return (
-    <div className="mb-10">
+    <div className="mb-6">
       <label className="block mb-1 text-gray-600">산업군</label>
       <select
         value={industry}
-        onChange={(e) => setIndustry(e.target.value)}
+        onChange={(e) => setIndustry(e.target.value)} // ✅ 상태 변경
         className="border border-gray-300 rounded p-2 w-full"
       >
         <option value="">선택해주세요</option>
@@ -26,4 +26,4 @@ const IndustrySelector: React.FC<IndustrySelectorProps> = ({
   );
 };
 
-export default IndustrySelector;
+export default IndustryInput;

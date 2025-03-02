@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -14,7 +14,10 @@ const Sidebar: React.FC = () => {
     <aside className="bg-mainnavy text-white min-h-screen w-64 flex flex-col">
       {/* 로고 또는 타이틀 영역 */}
       <div className="h-16 py-5 px-6 font-bold text-xl border-b border-gray-700">
-        ZeroFit
+        <Link to="/">
+          <span className="text-white">Zero</span>
+          <span className="text-mainmint">Fit</span>
+        </Link>
       </div>
 
       {/* 네비게이션 메뉴 */}
@@ -35,8 +38,8 @@ const Sidebar: React.FC = () => {
               <li key={item.to}>
                 <NavLink
                   to={item.to}
-                  className={`block py-3 px-6 rounded-lg transition-colors ${
-                    isActive ? "bg-gray-700 font-bold" : "hover:bg-gray-800"
+                  className={`block py-3 px-6  transition-colors ${
+                    isActive ? "bg-secondmint font-bold" : "hover:bg-gray-800"
                   }`}
                 >
                   {item.label}

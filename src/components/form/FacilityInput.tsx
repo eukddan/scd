@@ -1,36 +1,36 @@
 import React, { useState } from "react";
 
-interface FacilityManagerProps {
+interface FacilityInputProps {
   facilities: string[];
-  setFacilities: React.Dispatch<React.SetStateAction<string[]>>;
+  setFacilities: (facilities: string[]) => void; // ✅ Zustand과 호환되는 타입
 }
 
-const FacilityManager: React.FC<FacilityManagerProps> = ({
+const FacilityInput: React.FC<FacilityInputProps> = ({
   facilities,
   setFacilities,
 }) => {
   const [facilityInput, setFacilityInput] = useState("");
 
-  // 설비 추가
+  // 설비 추가 함수
   const addFacility = () => {
     const trimmed = facilityInput.trim();
     if (trimmed && !facilities.includes(trimmed)) {
-      setFacilities((prev) => [...prev, trimmed]);
-      setFacilityInput("");
+      setFacilities([...facilities, trimmed]); // ✅ 새로운 배열로 상태 업데이트
+      setFacilityInput(""); // 입력창 초기화
     }
   };
 
-  // 엔터 키 입력 시 추가
+  // Enter 키 입력 시 추가 & 기본 동작 방지
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      event.preventDefault(); // 기본 폼 제출 방지
+      event.preventDefault(); // ✅ 페이지 새로고침 방지
       addFacility();
     }
   };
 
-  // 설비 제거
+  // 설비 제거 함수
   const removeFacility = (target: string) => {
-    setFacilities((prev) => prev.filter((f) => f !== target));
+    setFacilities(facilities.filter((f) => f !== target)); // ✅ 새로운 배열로 상태 업데이트
   };
 
   return (
@@ -42,7 +42,7 @@ const FacilityManager: React.FC<FacilityManagerProps> = ({
           type="text"
           value={facilityInput}
           onChange={(e) => setFacilityInput(e.target.value)}
-          onKeyDown={handleKeyDown} // 🔥 엔터 키 입력 가능
+          onKeyDown={handleKeyDown} // ✅ Enter 키 입력 가능 + 기본 동작 방지
           placeholder="설비명을 입력하세요"
           className="border border-gray-300 rounded p-2 flex-1"
         />
@@ -69,4 +69,4 @@ const FacilityManager: React.FC<FacilityManagerProps> = ({
   );
 };
 
-export default FacilityManager;
+export default FacilityInput;

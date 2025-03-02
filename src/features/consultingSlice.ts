@@ -1,46 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// ✅ 컨설팅 입력 데이터를 위한 타입
+// Step 데이터 타입 정의
 interface ConsultingState {
-  industry: string;
-  facilities: string[];
-  investment: number | "";
-  emission: number | "";
+  industry?: string;
+  facilities?: string[];
+  investment?: number;
+  emission?: number;
+  targetEmission?: number;
+  roiPeriod?: number;
 }
 
-// ✅ 초기 상태 값
-const initialState: ConsultingState = {
-  industry: "",
-  facilities: [],
-  investment: "",
-  emission: "",
-};
+const initialState: ConsultingState = {};
 
 const consultingSlice = createSlice({
   name: "consulting",
   initialState,
   reducers: {
-    // ✅ Step1: 산업군 및 설비 정보 업데이트
-    setIndustryAndFacilities: (
+    updateStepData: (
       state,
-      action: PayloadAction<{ industry: string; facilities: string[] }>
+      action: PayloadAction<Partial<ConsultingState>>
     ) => {
-      state.industry = action.payload.industry;
-      state.facilities = action.payload.facilities;
+      return { ...state, ...action.payload };
     },
-
-    // ✅ Step2: 투자 가능 금액 및 배출량 업데이트
-    setInvestmentAndEmission: (
-      state,
-      action: PayloadAction<{ investment: number | ""; emission: number | "" }>
-    ) => {
-      state.investment = action.payload.investment;
-      state.emission = action.payload.emission;
-    },
+    resetData: () => initialState, // 데이터 초기화 (결과 페이지에서 활용 가능)
   },
 });
 
-// ✅ 액션 & 리듀서 내보내기
-export const { setIndustryAndFacilities, setInvestmentAndEmission } =
-  consultingSlice.actions;
+export const { updateStepData, resetData } = consultingSlice.actions;
 export default consultingSlice.reducer;

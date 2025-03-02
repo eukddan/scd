@@ -4,8 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        mainnavy: "#0B1340",
+        mainnavy: "#171523",
+        mainmint: "#04D9D9",
+        secondmint: "#04D9C4",
       },
+    },
+    fontFamily: {
+      Cafe24Shiningstar: ["Cafe24Shiningstar"],
     },
   },
   plugins: [],

@@ -1,4 +1,3 @@
-// src/components/common/Button/Button.tsx
 import React from "react";
 
 type ButtonVariant = "primary" | "secondary" | "outline";
@@ -10,9 +9,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-black text-white hover:bg-gray-900", // ✅ Black으로 변경
-  secondary: "bg-gray-600 text-white hover:bg-gray-700",
-  outline: "bg-transparent text-black border border-black hover:bg-gray-100", // ✅ Outline도 블랙 스타일로 변경 가능
+  primary: "bg-black text-white hover:bg-gray-900", // ✅ Black
+  secondary: "bg-white text-black border border-gray-300 hover:bg-gray-200", // ✅ White로 변경
+  outline: "bg-transparent text-black border border-black hover:bg-gray-100",
 };
 
 const Button: React.FC<ButtonProps> = ({
