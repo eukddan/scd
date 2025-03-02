@@ -10,10 +10,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-blue-600 text-white hover:bg-blue-700",
+  primary: "bg-black text-white hover:bg-gray-900", // ✅ Black으로 변경
   secondary: "bg-gray-600 text-white hover:bg-gray-700",
-  outline:
-    "bg-transparent text-blue-600 border border-blue-600 hover:bg-blue-50",
+  outline: "bg-transparent text-black border border-black hover:bg-gray-100", // ✅ Outline도 블랙 스타일로 변경 가능
 };
 
 const Button: React.FC<ButtonProps> = ({

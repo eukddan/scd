@@ -3,28 +3,20 @@ import Sidebar from "../../components/layout/Sidebar";
 import Header from "../../components/layout/consultingHeader/Header";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
+import InfoPreview from "../../components/common/InfoPreviewCard";
+import FacilityInput from "../../components/form/FacilityInput";
+import IndustryInput from "../../components/form/IndustryInput";
+import StepIndicator from "../../components/common/StepIndicator";
+import useGoToNextStep from "../../hooks/useGoToNextStep"; // Step 이동 Hook
 
 const ConsultingStep1: React.FC = () => {
-  const [industry, setIndustry] = useState("");
-  const [facilityInput, setFacilityInput] = useState("");
-  const [facilities, setFacilities] = useState<string[]>([]);
+  const [industry, setIndustry] = useState(""); // 산업군 선택 상태
+  const [facilities, setFacilities] = useState<string[]>([]); // 보유 설비 목록
 
-  // 설비 추가
-  const addFacility = () => {
-    const trimmed = facilityInput.trim();
-    if (trimmed && !facilities.includes(trimmed)) {
-      setFacilities((prev) => [...prev, trimmed]);
-      setFacilityInput("");
-    }
-  };
-
-  // 설비 제거
-  const removeFacility = (target: string) => {
-    setFacilities((prev) => prev.filter((f) => f !== target));
-  };
+  const goToNextStep = useGoToNextStep(); // 다음 Step으로 이동하는 Hook
 
   return (
-    <div className="flex w-full max-w-[1440px] lg:max-w-[1520px] xl:max-w-[1920px]">
+    <div className="flex w-full">
       {/* 사이드바 */}
       <Sidebar />
 
@@ -32,70 +24,47 @@ const ConsultingStep1: React.FC = () => {
       <div className="flex-1 flex flex-col bg-gray-50 min-h-screen">
         {/* 헤더 */}
         <Header />
-        <div className="ml-16 mt-10">
-          {/* 메인 컨텐츠 */}
 
-          <main className="flex-1 p-6">
-            <h1 className="text-2xl font-bold mb-6">산업군 및 보유설비 선택</h1>
+        {/* 🔥 수직 정렬을 위한 flex-col 적용 */}
+        <div className="flex flex-col items-center w-full max-w-[1200px] px-6 md:px-10 mt-8 mx-auto gap-6">
+          {/* 🔥 제목 & StepIndicator (수평 정렬) */}
+          <div className="flex justify-between items-center w-full">
+            <h1 className="text-2xl font-bold">산업군 및 보유설비 선택</h1>
+            <StepIndicator
+              currentStep={1}
+              totalSteps={3}
+              className="text-gray-700"
+            />
+          </div>
 
-            <Card>
-              {/* 산업군 선택 */}
-              <div className="mb-4">
-                <label className="block mb-1 text-gray-600">산업군</label>
-                <select
-                  value={industry}
-                  onChange={(e) => setIndustry(e.target.value)}
-                  className="border border-gray-300 rounded p-2 w-full"
-                >
-                  <option value="">선택해주세요</option>
-                  <option value="철강">철강</option>
-                  <option value="화학">화학</option>
-                  <option value="제조업">제조업</option>
-                </select>
-              </div>
+          {/* 🔥 입력 폼 & 정보 미리보기 (수평 정렬) */}
+          <div className="flex justify-between items-start w-full gap-6">
+            {/* 좌측 입력 폼 */}
+            <div className="w-full max-w-[800px] flex-grow">
+              <Card>
+                <IndustryInput industry={industry} setIndustry={setIndustry} />
+                <FacilityInput
+                  facilities={facilities}
+                  setFacilities={setFacilities}
+                />
 
-              {/* 보유설비 입력 */}
-              <div className="mb-4">
-                <label className="block mb-1 text-gray-600">
-                  보유설비 입력
-                </label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={facilityInput}
-                    onChange={(e) => setFacilityInput(e.target.value)}
-                    placeholder="설비명을 입력하세요"
-                    className="border border-gray-300 rounded p-2 flex-1"
-                  />
-                  <Button variant="primary" onClick={addFacility}>
-                    추가
+                {/* 다음 버튼 */}
+                <div className="text-right mt-6">
+                  <Button
+                    variant="primary"
+                    onClick={() => goToNextStep({ industry, facilities })}
+                  >
+                    다음
                   </Button>
                 </div>
+              </Card>
+            </div>
 
-                {/* 태그 형태로 추가된 설비 표시 */}
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {facilities.map((facility) => (
-                    <span
-                      key={facility}
-                      className="bg-gray-200 text-gray-800 px-2 py-1 rounded flex items-center gap-2"
-                    >
-                      {facility}
-                      <button
-                        onClick={() => removeFacility(facility)}
-                        className="text-red-500 hover:text-red-700 font-bold"
-                      >
-                        &times;
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="text-right">
-                <Button variant="primary">다음</Button>
-              </div>
-            </Card>
-          </main>
+            {/* 우측 입력 정보 미리보기 */}
+            <div className="w-[280px] flex-shrink-0">
+              <InfoPreview industry={industry} facilities={facilities} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
