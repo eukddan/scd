@@ -37,14 +37,14 @@ interface SelectProps {
   className?: string;
 }
 
-const Select: React.FC<SelectProps> = ({
+const Select = ({
   label,
   options,
   value,
   onChange,
   placeholder = "선택해주세요!",
   className = "",
-}) => {
+}: SelectProps) => {
   return (
     <div className={`mb-4 ${className}`}>
       {label && <label className="block mb-1 text-gray-600">{label}</label>}

@@ -1,19 +1,18 @@
 import React from "react";
 import { useConsultingStore } from "../../store/store"; // Zustand Store 가져오기
-import { useNavigate } from "react-router-dom";
-import Sidebar from "../../components/layout/Sidebar";
-import Header from "../../components/layout/consultingHeader/Header";
-import Card from "../../components/common/Card";
+import useGoToNextStep from "../../hooks/useGoToNextStep"; // 🚀 useGoToNextStep 가져오기
+
+import Sidebar from "../../components/sidebar/Sidebar";
+import Header from "../../components/header/ConsultingPageHeader";
+import Card from "../../components/card/Card";
 import Button from "../../components/common/Button";
 import StepIndicator from "../../components/common/StepIndicator";
-import IndustryInput from "../../components/form/IndustryInput";
-import FacilityInput from "../../components/form/FacilityInput";
-import InfoPreview from "../../components/common/InfoPreviewCard";
+import IndustryInput from "../../components/input-form/IndustryInput";
+import FacilityInput from "../../components/input-form/FacilityInput";
+import InfoPreview from "../../components/card/InfoPreviewCard";
 
-const ConsultingStep1: React.FC = () => {
-  const navigate = useNavigate();
-
-  // ✅ Zustand 상태 가져오기
+const ConsultingStep1 = () => {
+  const goToNextStep = useGoToNextStep(); // 🚀 useGoToNextStep 사용
   const { industry, facilities, setIndustry, setFacilities } =
     useConsultingStore();
 
@@ -44,10 +43,7 @@ const ConsultingStep1: React.FC = () => {
                 />
 
                 <div className="text-right mt-6">
-                  <Button
-                    variant="primary"
-                    onClick={() => navigate("/consulting/step2")}
-                  >
+                  <Button variant="primary" onClick={goToNextStep}>
                     다음
                   </Button>
                 </div>

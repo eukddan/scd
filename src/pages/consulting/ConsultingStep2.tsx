@@ -1,18 +1,19 @@
 import React from "react";
 import { useConsultingStore } from "../../store/store"; // Zustand Store 가져오기
-import { useNavigate } from "react-router-dom";
-import Sidebar from "../../components/layout/Sidebar";
-import Header from "../../components/layout/consultingHeader/Header";
-import Card from "../../components/common/Card";
+import useGoToNextStep from "../../hooks/useGoToNextStep"; // 🚀 useGoToNextStep 가져오기
+import useGoToPreviousStep from "../../hooks/useGoToPreviousStep"; // 🚀 useGoToPreviousStep 가져오기
+
+import Sidebar from "../../components/sidebar/Sidebar";
+import Header from "../../components/header/ConsultingPageHeader";
+import Card from "../../components/card/Card";
 import Button from "../../components/common/Button";
 import StepIndicator from "../../components/common/StepIndicator";
-import GenericInput from "../../components/form/GenericInput";
-import InfoPreview from "../../components/common/InfoPreviewCard";
+import GenericInput from "../../components/input-form/GenericInput";
+import InfoPreview from "../../components/card/InfoPreviewCard";
 
-const ConsultingStep2: React.FC = () => {
-  const navigate = useNavigate();
-
-  // ✅ Zustand 상태 가져오기
+const ConsultingStep2 = () => {
+  const goToNextStep = useGoToNextStep(); // 🚀 다음 단계 이동 훅 사용
+  const goToPreviousStep = useGoToPreviousStep(); // 🚀 이전 단계 이동 훅 사용
   const {
     industry,
     facilities,
@@ -47,7 +48,6 @@ const ConsultingStep2: React.FC = () => {
                   placeholder="투자 가능 금액을 입력하세요"
                   value={investment || ""}
                   setValue={(value) => setInvestment(value as number)}
-                  unit="원"
                 />
 
                 {/* ✅ 현재 배출량 입력 */}
@@ -56,21 +56,14 @@ const ConsultingStep2: React.FC = () => {
                   placeholder="현재 배출량을 입력하세요"
                   value={emission || ""}
                   setValue={(value) => setEmission(value as number)}
-                  unit="tCO₂-eq"
                 />
 
                 {/* 🔥 버튼 그룹 (이전 & 다음) */}
                 <div className="flex justify-between mt-6">
-                  <Button
-                    variant="secondary"
-                    onClick={() => navigate("/consulting/step1")}
-                  >
+                  <Button variant="secondary" onClick={goToPreviousStep}>
                     이전
                   </Button>
-                  <Button
-                    variant="primary"
-                    onClick={() => navigate("/consulting/step3")}
-                  >
+                  <Button variant="primary" onClick={goToNextStep}>
                     다음
                   </Button>
                 </div>

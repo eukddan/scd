@@ -1,4 +1,3 @@
-// src/components/common/StepIndicator/StepIndicator.tsx
 import React from "react";
 
 interface StepIndicatorProps {
@@ -15,12 +14,12 @@ interface StepIndicatorProps {
   className?: string;
 }
 
-const StepIndicator: React.FC<StepIndicatorProps> = ({
+const StepIndicator = ({
   currentStep,
   totalSteps,
   align = "right",
   className = "",
-}) => {
+}: StepIndicatorProps) => {
   const alignmentClass =
     align === "center"
       ? "text-center"
@@ -30,7 +29,7 @@ const StepIndicator: React.FC<StepIndicatorProps> = ({
 
   return (
     <div
-      className={`text-sm  font-bold text-gray-600 ${alignmentClass} ${className}`}
+      className={`text-sm font-bold text-gray-600 ${alignmentClass} ${className}`}
     >
       Step {currentStep} / {totalSteps}
     </div>

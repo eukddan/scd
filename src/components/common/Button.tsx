@@ -14,12 +14,12 @@ const variantStyles: Record<ButtonVariant, string> = {
   outline: "bg-transparent text-black border border-black hover:bg-gray-100",
 };
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   variant = "primary",
   children,
   className = "",
   ...rest
-}) => {
+}: ButtonProps) => {
   return (
     <button
       className={`
