@@ -23,6 +23,9 @@ const HeroSection = () => {
         <span className="text-white">Zero</span>
         <span className="text-secondmint">!</span>
       </p>
+      <p>
+        <span className="text-secondmint">안녕하십니까</span>
+      </p>
     </section>
   );
 };
