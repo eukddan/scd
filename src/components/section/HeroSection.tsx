@@ -25,6 +25,7 @@ const HeroSection = () => {
       </p>
       <p>
         <span className="text-secondmint">안녕하십니까</span>
+        <span className="text-secondmint">안녕못함</span>
       </p>
     </section>
   );
