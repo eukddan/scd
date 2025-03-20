@@ -26,7 +26,7 @@ const ConsultingAnalysis = () => {
         {/* 메인 컨텐츠 */}
         <div className="flex flex-col items-center w-full max-w-[1200px] px-6 md:px-10 mt-12 mx-auto">
           <Card className="p-8 w-full">
-            <h2 className="text-xl font-bold mb-6">입력한 정보</h2>
+            <h2 className="text-xl font-bold mb-6">입력한 정보입니닷.</h2>
             <div className="grid grid-cols-2 gap-6">
               {/* 산업군 */}
               <div>
