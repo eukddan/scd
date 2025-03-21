@@ -26,12 +26,6 @@ const HeroSection = () => {
       <p>
         <span className="text-secondmint">플러스라고</span>
       </p>
-      <p>
-        <span className="text-secondmint">플러스이시라고</span>
-      </p>
-      <p>
-        <span className="text-secondmint">마이너스이신데?</span>
-      </p>
     </section>
   );
 };
